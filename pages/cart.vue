@@ -1,74 +1,61 @@
-<template>
- <div class="piw">
-  <selection>
-  <div class="container mt-5">
-    <div v-if="cartItems.length === 0" class="alert alert-info">
-      Your shopping cart is empty!
-    </div>
-    <div v-else>
-      <h2>Shopping cart</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>amount</th>
-            <th>Total</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in cartItems" :key="index">
-            <td>{{ item.name }}</td>
-            <td>$ {{ item.price }}</td>
-            <td>
-              <input type="number" v-model="item.quantity" min="1" @input="updateCart" />
-            </td>
-            <td>$ {{ item.quantity * item.price }}</td>
-            <td>
-              <button class="btn btn-danger" @click="removeItem(index)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h3>Total: $ {{ total }}</h3>
-      <button class="btn btn-primary" @click="checkout">Checkout</button>
-    </div>
-  </div>
-</selection>
-</div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      cartItems: [
-        { name: 'Lenovo IdeaPad 3 14ITL6', price: 504, quantity: 1 },
-        { name: 'Acer Aspire 5 (Ryzen 5000) A515-45', price: 410, quantity: 1 },
-        { name: 'HP Laptop 15s-fq2503TU', price: 454, quantity: 1 },
-        { name: 'Oppo Reno8', price: 411, quantity: 1 },
-        { name: 'OPPO Reno9', price: 454, quantity: 1 },
-        { name: 'OPPO Reno10', price: 630, quantity: 1 },
-        { name: 'Galaxy Tab S9 FE', price: 473, quantity: 1 },
-        { name: 'Tab S9FE+', price: 536, quantity: 1 },
-        { name: 'Wi-Fi Galaxy Tab S9 FE', price: 410, quantity: 1 },
-      ],
-    };
-  },
-  computed: {
-    total() {
-      return this.cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
-    },
-  },
-  methods: {
-    updateCart() {
-    },
-    removeItem(index) {
-    },
-    checkout() {
-      alert('Checkout berhasil!');
-    },
-  },
-};
+<script lang="ts" setup>
+import type { Products } from "~/types/products";
+const products = ref<Products[]>([]);
+const totalPrice = computed(() => {
+  return products.value
+    .filter((product) => product.price !== undefined)
+    .reduce(
+      (accumulator, currentValue) => accumulator + currentValue.price!,
+      0
+    );
+});
+onMounted(() => {
+  let localStorageData = localStorage.getItem("products");
+  if (localStorageData) {
+    products.value = JSON.parse(localStorageData);
+  }
+});
 </script>
+
+<template>
+  <section>
+    <div class="container">
+      <div class="py-10 flex gap-6">
+        <div class="w-[70%]">
+          <div
+            class="flex justify-between items-center pb-7 border-b border- gray-300 mb-6"
+          >
+            <h1 class="text-3xl font-medium">Shopping Cart</h1>
+            <p class="text-3xl font-medium">{{ products.length }} Items</p>
+          </div>
+          <div class="flex flex-col gap-6">
+            <CardsCardCart />
+          </div>
+        </div>
+        <div class="w-[30%] bg-white shadow-xl h-max p-6">
+          <h3 class="text-xl font-medium mb-6">Order Summary</h3>
+          <div class="flex flex-col gap-3 border-b border-gray-300 pb-4">
+            <div>
+              <div class="flex gap-4 items-center">
+                <span class="text-limit limit-1 text-sm"
+                  >Men's Streetwear Fashion</span
+                >
+                <span class="text-sm font-semibold">$30</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 flex items-center justify-between mb-6">
+            <span class="text-base">Total</span>
+            <span class="text-base font-bold">$30</span>
+          </div>
+
+          <button
+            class="bg-blue-600 text-white text-base font-bold w-full py- 2 rounded-lg"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
