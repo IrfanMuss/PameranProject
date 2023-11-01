@@ -14,20 +14,19 @@
 export default {
   data() {
     return {
-      storeName: "Vann Store"
+      storeName: "Vann Store",
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
-
 .home {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('img/bg.jpg') center/cover no-repeat;
+  background: url("img/bg.jpg") center/cover no-repeat;
 }
 
 .hero {
@@ -41,7 +40,7 @@ export default {
 .hero-title {
   font-size: 2.5em;
   margin-bottom: 10px;
-  color: #007BFF;
+  color: #007bff;
 }
 
 .hero-description {
@@ -51,7 +50,7 @@ export default {
 }
 
 .hero-button {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: #fff;
   border: none;
   padding: 15px 30px;
@@ -64,5 +63,4 @@ export default {
 .hero-button:hover {
   background-color: #0056b3;
 }
-
 </style>
