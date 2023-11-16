@@ -26,7 +26,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("img/bg.jpg") center/cover no-repeat;
+  background: url("images/bg.jpg") center/cover no-repeat;
 }
 
 .hero {
