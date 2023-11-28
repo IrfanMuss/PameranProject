@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { useProductsStore } from "~/stores/products";
 
+definePageMeta({
+  middleware: ["user-access"],
+});
+
 const productStore = useProductsStore();
 const allProducts = ref([]);
 
@@ -38,3 +42,62 @@ const selectedCategory = ref("");
     </section>
   </div>
 </template>
+
+<style scoped>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.bg-orange-500 {
+  background-color: #ff8c00;
+}
+
+.bg-green-500 {
+  background-color: #00cc00;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.rounded-lg {
+  border-radius: 0.375rem;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+
+</style>

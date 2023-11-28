@@ -33,19 +33,20 @@ export default {
   text-align: center;
   padding: 40px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
 }
 
 .hero-title {
-  font-size: 2.5em;
+  font-size: 3em;
   margin-bottom: 10px;
   color: #007bff;
 }
 
 .hero-description {
   font-size: 1.5em;
-  color: #555;
+  color: #333;
   margin-bottom: 30px;
 }
 

@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import type { Products } from "~/types/products";
+
+definePageMeta({
+  middleware: ["user-access"],
+});
+
 const products = ref<Products[]>([]);
 const totalPrice = computed(() => {
   return products.value
@@ -74,3 +79,120 @@ const removeCart = (id: number) => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.border-b {
+  border-bottom: 1px solid #ccc;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+
+.bg-white {
+  background-color: #fff;
+}
+
+.shadow-xl {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.h-max {
+  height: max-content;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-light {
+  color: #888;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.text-limit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.bg-blue-600 {
+  background-color: #3498db;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.rounded-lg {
+  border-radius: 0.375rem;
+}
+
+</style>
