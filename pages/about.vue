@@ -14,17 +14,17 @@
         <div class="flex flex-col gap-4">
           <div>
             <h3 class="text-xl font-bold mb-2">Email</h3>
-            <p>Email: your.email@example.com</p>
+            <p>Email: irfanmustofa305@gmail.com</p>
           </div>
   
           <div>
             <h3 class="text-xl font-bold mb-2">Nomor WhatsApp</h3>
-            <p>Nomor WhatsApp: +1234567890</p>
+            <p>Nomor WhatsApp: 082136958845</p>
           </div>
   
           <div>
             <h3 class="text-xl font-bold mb-2">Alamat</h3>
-            <p>Alamat: Jl. Contoh No. 123, Kota Anda</p>
+            <p>Prov.Jawa Tengah Kab.Banjarnegara Kec. Punggelan RT02 RW10</p>
           </div>
         </div>
       </div>
