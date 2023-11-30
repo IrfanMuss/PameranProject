@@ -10,7 +10,7 @@ defineEmits(["selectedCategory"]);
       class="border border-primary flex items-center justify-center px-3 py-2 rounded-lg gap-4 cursor-pointer w-full"
       @click="isShow = !isShow"
     >
-      <span class="text-primary font-medium">Category</span>
+      <span class="text-primary font-medium">Kategori</span>
       <i
         :class="`ri-arrow-down-s-line text-primary text-xl text-bold transition
 duration-300 ${isShow ? 'rotate-180' : 'rotate-0'}`"

@@ -20,19 +20,19 @@ const submitCategory = () => {
 <template>
   <section class="flex justify-center py-10">
     <div class="w-[500px]">
-      <h1 class="text-2xl mb-7 font-medium">Create Category</h1>
+      <h1 class="text-2xl mb-7 font-medium">Buat Kategory</h1>
       <div
         v-if="isShowAlert"
         class="p-4 mb-4 text-sm rounded-lg bg-green-100 text-green-800"
       >
-        Create Category Successfully
+        Buat Kategory Berhasil!!!
       </div>
       <form @submit.prevent="submitCategory">
         <div class="mb-6">
           <label
             for="name"
             class="block mb-2 text-sm font-medium text-gray- 900"
-            >Name</label
+            >Nama</label
           >
 
           <input

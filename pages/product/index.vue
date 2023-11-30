@@ -19,17 +19,17 @@ const selectedCategory = ref("");
     <section>
       <div class="container">
         <div class="py-10">
-          <div class="mb-6 flex justify-end gap-6">
+          <div class="mb-6 flex justify-center items-center gap-6">
             <NuxtLink
               to="/category/create"
-              class="bg-orange-500 text-white flex justify- center items-center px-3 rounded-lg"
-              >Create category
+              class="bg-orange-500 text-white flex justify-center items-center px-3 rounded-lg"
+            >➕ Kategori
             </NuxtLink>
             <NuxtLink
               to="/product/create"
               class="bg-green-500 text-white flex justify-center items-center px-3 rounded-lg"
-              >Create Products</NuxtLink
-            >
+            >➕ Project
+            </NuxtLink>
             <Dropdown @selected-category="selectedCategory = $event" />
           </div>
           <div class="flex gap-6 flex-wrap mx-auto">
@@ -62,16 +62,12 @@ const selectedCategory = ref("");
   display: flex;
 }
 
-.justify-end {
-  justify-content: flex-end;
+.items-center {
+  align-items: center;
 }
 
 .gap-6 {
   gap: 1.5rem;
-}
-
-.items-center {
-  align-items: center;
 }
 
 .bg-orange-500 {
@@ -98,6 +94,4 @@ const selectedCategory = ref("");
 .flex-wrap {
   flex-wrap: wrap;
 }
-
-
 </style>

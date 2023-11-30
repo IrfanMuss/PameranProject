@@ -9,17 +9,16 @@ const products = ref<Products[]>([]);
 const totalPrice = computed(() => {
   return products.value
     .filter((product) => product.price !== undefined)
-    .reduce(
-      (accumulator, currentValue) => accumulator + currentValue.price!,
-      0
-    );
+    .reduce((accumulator, currentValue) => accumulator + currentValue.price!, 0);
 });
+
 onMounted(() => {
   let localStorageData = localStorage.getItem("products");
   if (localStorageData) {
     products.value = JSON.parse(localStorageData);
   }
 });
+
 const removeCart = (id: number) => {
   products.value = products.value.filter((item) => item.id !== id);
   localStorage.setItem("products", JSON.stringify(products.value));
@@ -27,17 +26,16 @@ const removeCart = (id: number) => {
 </script>
 
 <template>
-  <section>
-    <div class="container">
-      <div class="py-10 flex gap-6">
-        <div class="w-[70%]">
-          <div
-            class="flex justify-between items-center pb-7 border-b border-gray- 300 mb-6"
-          >
-            <h1 class="text-3xl font-medium">Shopping Cart</h1>
-            <p class="text-3xl font-medium">{{ products.length }} Items</p>
-          </div>
-          <div v-if="products.length > 0" class="flex flex-col gap-6">
+  <section class="bg-gray-100 min-h-screen py-12">
+    <div class="container mx-auto">
+      <div class="flex justify-between items-center mb-12">
+        <h1 class="text-4xl font-bold">Shopping Cart</h1>
+        <p class="text-2xl font-semibold">{{ products.length }} Items</p>
+      </div>
+
+      <div class="flex">
+        <div class="w-3/4 pr-8">
+          <div v-if="products.length > 0" class="grid grid-cols-1 gap-6">
             <template v-for="(item, index) in products" :key="index">
               <CardsCardCart :product="item" @removeCart="removeCart" />
             </template>
@@ -46,32 +44,32 @@ const removeCart = (id: number) => {
             <h5 class="text-xl font-light text-center">Cart is empty</h5>
           </div>
         </div>
-        <div class="w-[30%] bg-white shadow-xl h-max p-6">
+
+        <div class="w-1/4 bg-white p-6 rounded-lg shadow-md">
           <h3 class="text-xl font-medium mb-6">Order Summary</h3>
-          <div class="flex flex-col gap-3 border-b border-gray-300 pb-4">
-            <div v-if="products.length > 0">
-              <div
-                v-for="(item, index) in products"
-                :key="index"
-                class="flex gap-4 items-center"
-              >
-                <span class="text-limit limit-1 text-sm">{{ item.name }}</span>
-                <span class="text-sm font-semibold">${{ item.price }}</span>
-              </div>
-            </div>
-            <div v-else>
-              <p class="text-sm text-center font-light">
-                There are no to orders yet
-              </p>
+
+          <div v-if="products.length > 0">
+            <div class="grid grid-cols-2 gap-4">
+              <template v-for="(item, index) in products" :key="index">
+                <div class="flex items-center">
+                  <span class="text-sm">{{ item.name }}</span>
+                  <span class="text-sm font-semibold">${{ item.price }}</span>
+                </div>
+              </template>
             </div>
           </div>
+          <div v-else>
+            <p class="text-sm text-center font-light">
+              There are no orders yet
+            </p>
+          </div>
+
           <div class="pt-4 flex items-center justify-between mb-6">
             <span class="text-base">Total</span>
             <span class="text-base font-bold">${{ totalPrice }}</span>
           </div>
-          <button
-            class="bg-blue-600 text-white text-base font-bold w-full py-2 rounded-lg"
-          >
+
+          <button class="bg-blue-600 text-white text-base font-bold w-full py-2 rounded-lg hover:bg-blue-700">
             Checkout
           </button>
         </div>
@@ -81,118 +79,84 @@ const removeCart = (id: number) => {
 </template>
 
 <style scoped>
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  /* Custom styles for the cart page */
 
-.flex {
-  display: flex;
-}
+  .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.justify-between {
-  justify-content: space-between;
-}
+  .cart-section {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    padding: 40px 0;
+  }
 
-.items-center {
-  align-items: center;
-}
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
+  .cart-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 
-.border-b {
-  border-bottom: 1px solid #ccc;
-}
+  .cart-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
+  .cart-empty {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: light;
+  }
 
+  .order-summary {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
-.bg-white {
-  background-color: #fff;
-}
+  .summary-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
 
-.shadow-xl {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  .summary-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
 
-.h-max {
-  height: max-content;
-}
+  .total-price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
 
-.p-6 {
-  padding: 1.5rem;
-}
+  .checkout-btn {
+    background-color: #1e40af;
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 
-.text-3xl {
-  font-size: 1.875rem;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-}
-
-.text-light {
-  color: #888;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.gap-6 {
-  gap: 1.5rem;
-}
-
-.text-limit {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-base {
-  font-size: 1rem;
-}
-
-.font-bold {
-  font-weight: bold;
-}
-
-.bg-blue-600 {
-  background-color: #3498db;
-}
-
-.text-white {
-  color: #fff;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.rounded-lg {
-  border-radius: 0.375rem;
-}
-
+  .checkout-btn:hover {
+    background-color: #1c3faa;
+  }
 </style>

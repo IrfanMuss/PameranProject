@@ -2,9 +2,9 @@
   <div class="home">
     <div class="hero">
       <h1 class="hero-title">Selamat datang di {{ storeName }}</h1>
-      <p class="hero-description">Temukan produk berkualitas di toko kami.</p>
+      <p class="hero-description">Website Pameran Project IoT</p>
       <NuxtLink to="/product" class="text-base">
-        <button class="hero-button">Lihat Produk Kami</button>
+        <button class="hero-button">Lihat Project Kami</button>
       </NuxtLink>
     </div>
   </div>
@@ -14,7 +14,7 @@
 export default {
   data() {
     return {
-      storeName: "Vann Store",
+      storeName: "Pameran Projeck IoT",
     };
   },
 };
@@ -26,7 +26,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("images/bg.jpg") center/cover no-repeat;
+  background: url("images/bg.jpeg") center/cover no-repeat;
 }
 
 .hero {

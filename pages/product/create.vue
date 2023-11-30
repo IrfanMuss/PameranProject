@@ -17,20 +17,19 @@ const isLoading = ref(false);
 const { categories } = storeToRefs(categoryStore);
 categoryStore.getAllCategory();
 
-const formCreateProduct = [
-  { name: "name", label: "Name", type: "text", value: "", placeholder: "Men's Streetwear", required: true },
-  { name: "description", label: "Description", type: "text", value: "", placeholder: "This shirt features a vibrant and eye-catching color and a solid pattern that will give you a happy feeling...", required: true },
-  { name: "price", label: "Price", type: "number", value: "", placeholder: "$30", required: true },
+const formTambahProject = [
+  { name: "name", label: "Nama", type: "text", value: "", placeholder: "", required: true },
+  { name: "description", label: "Deskipsi", type: "text", value: "", placeholder: "", required: true },
   { name: "image", label: "Image", type: "file", value: {}, placeholder: "", required: true },
-  { name: "category", label: "Category", type: "select", value: "", placeholder: "", required: true },
+  { name: "category", label: "Kategori", type: "select", value: "", placeholder: "", required: true },
 ];
 
-const createProduct = async () => {
+const TambahProject = async () => {
   isLoading.value = true;
-  let file = formCreateProduct.find((item) => item.type === "file");
+  let file = formTambahProject.find((item) => item.type === "file");
   file = await uploadFile(file?.value);
   const result: { [key: string]: any } = {};
-  formCreateProduct.forEach((item: FormField) => {
+  formTambahProject.forEach((item: FormField) => {
     if(item.name){
       result[item.name] = item.value;
     }
@@ -75,7 +74,7 @@ const uploadFile = async (formFile: any) => {
 
 
 
-<template>
+<!-- <template>
   <section class="flex justify-center py-10">
     <div class="w-[500px]">
       <h1 class="text-2xl mb-7 font-medium">Create Products</h1>
@@ -127,4 +126,87 @@ const uploadFile = async (formFile: any) => {
       </form>
     </div>    
   </section>
+</template> -->
+
+<template>
+  <section class="flex justify-center py-10">
+    <div class="w-[500px]">
+      <h1 class="text-2xl mb-7 font-medium">Tambah Project</h1>
+      <div v-if="isShowAlert" :class="`p-4 mb-4 text-sm rounded-lg ${isSuccess ? 'bg-green-100 text-green-800' : 'text-red-800 bg-red-100'}`" role="alert">
+        {{ message }}
+      </div>
+      <form @submit.prevent="TambahProject">
+        <div class="mb-6" v-for="(item, index) in formTambahProject" :key="index">
+          <label
+            :for="item.name"
+            class="block mb-2 text-sm font-medium text-gray-900"
+          >
+            {{ item.label }}
+          </label>
+          <select
+            v-if="item.type === 'select'"
+            :id="item.name"
+            class="w-full text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            v-model="item.value"
+          >
+            <option disabled value="">Pilih Kategori</option>
+            <option v-for="(category, index) in categories" :key="index" :value="category.name">{{ category.name }}</option>
+          </select>
+          <input
+            v-else-if="item.type === 'file'"
+            :type="item.type"
+            :id="item.name"
+            @change="item.value = $event"
+            class="w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer p-2.5"
+            :required="item.required"
+          >
+          <input
+            v-else
+            :type="item.type"
+            :id="item.name"
+            v-model="item.value"
+            class="w-full text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            :placeholder="item.placeholder"
+            :required="item.required"
+          >
+        </div>
+        <button type="submit" class="btn-submit">
+          <span v-if="!isLoading">Submit</span>
+          <div v-else class="flex items-center gap-3">
+            <div class="w-5 h-5 rounded-full border-2 border-t-blue-500 animate-spin"></div>
+            <span>Loading</span>
+          </div>
+        </button>
+      </form>
+    </div>    
+  </section>
 </template>
+
+<style scoped>
+/* Custom Styles */
+.form-input {
+  width: 100%;
+  font-size: 0.875rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.625rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-submit {
+  width: 100%;
+  color: #fff;
+  background-color: #047857;
+  border: 1px solid #047857;
+  border-radius: 0.375rem;
+  padding: 0.625rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.btn-submit:hover {
+  background-color: #065f46;
+  border-color: #065f46;
+}
+</style>
