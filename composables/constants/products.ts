@@ -54,9 +54,9 @@ export const products = [
       },
       {
         id: 7,
-        name: "Line follower robot",
+        name: "Human Follower Robot",
         category: "robot",
-        image: "/images/rbl.jpg",
+        image: "/images/rbh.jpg",
         isCart: false,
         description: "Robot Arduino ini memiliki sensor yang dapat mendeteksi objek apa pun di dekatnya dan dapat mengikuti objek tersebut. jika Anda berada di depan robot, robot itu akan mulai mengikuti Anda. robot ini terdiri dari sensor ultrasonik dan sensor IR yang membantu mengikuti objek. ini mirip dengan robot penghindar rintangan saja tetapi cara kerjanya berlawanan. robot pengikut manusia adalah yang terbaik dalam proyek saat ini. Anda dapat membuat robot luar biasa ini dengan yang diberikan.",
       },
